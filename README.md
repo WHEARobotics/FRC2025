@@ -1,86 +1,47 @@
 # FRC2025
-Code for 2025 season, Reefscape
+Code for 2025 season.
 
 # Initializing environment
 
-## Install prerequisites 
+After you have cloned this repository, you will need to initialize the enironment. This will install the necessary dependencies for the project. 
 
-- [Install Python 3.12 on your development computer(s)](https://www.python.org/downloads/)
-- [Install FRC Game and RobotPy on your dev computer(s)](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/frc-game-tools.html)
-- [Install Poetry on your dev machines](https://python-poetry.org/docs/)
+Follow the instructions at [Installation.md](docs/Installation.md) to initialize the environment.
 
-## Initialize Python dependencies
+# Using Git
 
-- Run `poetry install`. This uses the `pyproject.toml` project configuration file and the `poetry.lock` file to determine what packages will be downloaded (by `pip` behind the scenes). 
+Git is used for "version control." Git is a programming's team "time machine". It allows you to go back in time to see what the code looked like at a certain point in time. It also allows you to see who made changes to the code and when.
 
-## Check Installation
+Unlike, say, Google Docs and more like, say, Microsoft Word, the changes you make to the code on your machine are not automatically shared with the rest of the team. You have to "commit" your changes to the "repository" (the shared codebase) in order to take a snapshot. You then have to "push" all your recent commits to share them with other team members.
 
-- Open a terminal 
-- Switch to this repository's root directory
-- Run `poetry shell` to activate the Poetry environment, **and then**
-- Run `robotpy --main src/hello_robot/hello_robot.py sim`
+If you make a mistake, you can use Git to go back to a previous version of the code.
 
-You should see the simulation window:
+Always **start** a new programming session by running `git pull`. This will update your local copy of the code with any changes that other team members have made.
 
-![image](docs/media/simulation_gui.png)
+Commit your code **early and often**. Programmers will often make dozens of commits per day. 
 
-And in your console you should see something like:
+- Just added a blank new file? Commit it.
+- Just added a comment? Commit it.
+- Just changed some logic? Commit it.
+- Just tweaked some variables until the code worked? Commit it.
+- Robot working as desired with your changes? **Absolutely** commit it
+- **Before you go home for the day**:
+  - Is the robot working? **Commit it**
+  - Is the robot not working? This is the hard one. 
+    - Is there **any** chance of someone else working on the robot code? **Commit it**. 
+      - Your message should begin with "WIP" (Work In Progress). 
+    - If you're the only one working on the robot code, you can wait. 
 
-```
-10:01:35:647 INFO    : faulthandler        : registered SIGUSR2 for PID 2744
-10:01:35:649 INFO    : halsim_gui          : WPILib HAL Simulation 2024.3.2.1
-HAL Extensions: Attempting to load: libhalsim_gui
-Simulator GUI Initializing.
-Simulator GUI Initialized!
-HAL Extensions: Successfully loaded extension
-10:01:35:767 WARNING : pyfrc.physics       : Cannot enable physics support, /Users/lobrien/Documents/src/FRC/FRC2025/src/hello_robot/physics.py not found
-10:01:35:768 INFO    : wpilib              : RobotPy version 2024.3.2.2
-10:01:35:768 INFO    : wpilib              : WPILib version 2024.3.2.1
-10:01:35:768 INFO    : wpilib              : Running with simulated HAL.
-10:01:35:770 INFO    : nt                  : could not open persistent file 'networktables.json': No such file or directory (this can be ignored if you aren't expecting persistent values)
-10:01:35:771 INFO    : nt                  : Listening on NT3 port 1735, NT4 port 5810
-Not loading CameraServerShared
-Success
+Pretty much the only time you **shouldn't** commit is when the code, if run on the robot, works worse than it did before. 
 
-********** Robot program startup complete **********
-2024-12-24 10:01:35.791 Python[2744:71983881] +[IMKClient subclass]: chose IMKClient_Modern
-2024-12-24 10:01:35.791 Python[2744:71983881] +[IMKInputSession subclass]: chose IMKInputSession_Modern
-Default DisabledPeriodic() method... Override me!
-Default RobotPeriodic() method... Override me!
-Default SimulationPeriodic() method... Override me!
+When you commit, add a brief descriptive message of what you did. For instance: 
 
-```
+- `Added new file SomeCommand.py for drive subsystem`
+- `Added comments to SomeCommand.py`
+- `Changed logic in SomeCommand.py to fix bug`
+- `Tweaked variables in SomeCommand.py to improve performance`
+- `Robot working with new command SomeCommand.py`
 
-### Troubleshooting Installation
+Git is a complex tool. If you don't know how to make a commit and add a message, **ask for help.** "Rolling back" changes (time traveling) can be difficult. If you aren't sure what to do, **ask for help**. 
 
-If you do not see the simulation window, or if you see an error message, please check the following:
-
-- Did you run `poetry shell` before running `robotpy`?
-
-If you see an error message like `command not found: robotpy`, then you may need to install the `robotpy` command line tool. You can do this by running `poetry install` again.
-
-- Did you run `robotpy` from the root directory of this repository?
-
-If you see an error message like `ERROR: /src/hello_robot/hello_robot.py does not exist`, then you may not be in the root directory of this repository.
-
-    - If you are running a Windows Command or Powershell prompt, check which directory you are in by running `dir`. 
-    - If you are running a Unix shell, check which directory you are in by running `pwd`.
-
-- Did you see any error messages when you ran `poetry install`?
-
-If you see an error message like `ERROR: Could not find a version that satisfies the requirement ...`, then you may have a network connectivity issue. 
-
-    - Check your network connection
-    - Run `poetry install` again
-
-- Did you see any error messages when you ran `poetry shell`?
-
-If you see an error message like `ERROR: The virtual environment was not created successfully because ensurepip is not available.`, then you may need to install `ensurepip` manually. 
-
-    - Run `poetry shell` again
-    - Run `python -m ensurepip`
-
-- Did you see any error messages when you ran `robotpy`?
-
-You should install the `robotpy` command-line tool while installing the FRC wpilib tools on this machine. 
+If you ever receive a message about a "merge conflict", **ask for help**. 
 
