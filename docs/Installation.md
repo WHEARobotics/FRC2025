@@ -18,7 +18,7 @@
 
 You should see the simulation window:
 
-![image](docs/media/simulation_gui.png)
+![image](media/simulation_gui.png)
 
 And in your console you should see something like:
 
