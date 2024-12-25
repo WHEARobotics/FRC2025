@@ -1,6 +1,9 @@
-from attr import dataclass
-
+from dataclasses import dataclass
+from wpilib import XboxController
 
 @dataclass(frozen=True)
 class OperatorInterfaceConstants:
-    pass
+    BUTTON_A: int = XboxController.Button.kA
+    BUTTON_B: int = XboxController.Button.kB
+    BUTTON_X: int = XboxController.Button.kX
+    BUTTON_Y: int = XboxController.Button.kY
