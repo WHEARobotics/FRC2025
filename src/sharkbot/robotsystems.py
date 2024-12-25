@@ -1,5 +1,6 @@
 # This class is a container for all the robot's subsystems. This class will change only occasionally, when you
 # add new subsystems or commands.
+from commands2.button import JoystickButton
 from wpilib import XboxController
 
 from sharkbot.commands.autonomous_command import AutonomousCommand
@@ -27,7 +28,7 @@ class RobotSystems:
         self.climber = Climber()
         self.vision = Vision()
 
-        # Initialize Controllers
+        # Initialize Controllers (These aren't subsystems because they're single pieces of hardware)
         self.driver_controller = XboxController(OperatorInterfaceConstants.DRIVER_CONTROLLER_PORT)
         self.gunner_controller = XboxController(OperatorInterfaceConstants.GUNNER_CONTROLLER_PORT)
 

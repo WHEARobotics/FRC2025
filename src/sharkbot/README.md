@@ -1,4 +1,13 @@
-from watchdog.observers.winapi import WAIT_TIMEOUTfrom jinja2.nodes import Getattr
+# Where should I put...?
+
+- **A new command?** `commands/{subsystem/` Use the [Command Recipe](../../NewCommandRecipe.md) to add a new command.
+- **A brand new subsystem?** Put the subsystem class in `subsystems/`. Write a testing class for it and put that in `tests`.
+You'll also need to create an instance of the object in the `RobotSystems` class in `RobotSystems.py`. Use the [Subsystem Recipe](../../NewSubsystemRecipe.md).
+- **A new sensor or piece of hardare?** `components/`. If it's only used in a single subsystem, create a normal `__init__`
+If it's used in multiple subsystems, use the [Singleton pattern](../../SingletonPatternRecipe.md) so that only one 
+instance of the sensor is created.
+- **Brand new behavior?** If it's a behavior that reads or writes to and from hardware, it should be a `Command`. If 
+it's a behavior that doesn't interact with hardware, it should be a utility function in `utilities/`.
 
 # Sharkbot Code Organization
 
@@ -17,6 +26,10 @@ The `subsystems` directory contains the definitions for the robots subsystem. A 
 ## Commands
 
 The `commands` directory contains the definitions for the robot's commands. A command is a small piece of code that performs a specific task. For example, the `FireCommand` class is responsible for the sequence of events that occur when the robot's `Shooter` subsystem fires a ball. In a simple case, maybe that's just opening a gate, waiting for the ball to clear, and closing the gate. 
+
+## Components
+
+The `components` directory contains the definitions for the robot's components. A component is a small piece of code that performs a specific task. For example, the `SwerveModule` class is responsible for controlling a single swerve module on the robot.
 
 ## Constants
 
