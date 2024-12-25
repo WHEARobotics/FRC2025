@@ -1,3 +1,5 @@
+import commands2
+
 from sharkbot.util.ntloggerutility import NTLoggerUtility
 
 
