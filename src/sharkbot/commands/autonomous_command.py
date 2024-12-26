@@ -1,3 +1,8 @@
+import commands2
+import wpilib
+
+from subsystems.drive import DriveSubsystem
+
 
 # See `MyContainer.getAutonomousCommand`
 def AutonomousCommand(drive: DriveSubsystem):

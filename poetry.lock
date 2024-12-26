@@ -1533,18 +1533,18 @@ files = [
 
 [[package]]
 name = "opencv-python"
-version = "4.10.0.84"
+version = "4.9.0.80"
 description = "Wrapper package for OpenCV python bindings."
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "opencv-python-4.10.0.84.tar.gz", hash = "sha256:72d234e4582e9658ffea8e9cae5b63d488ad06994ef12d81dc303b17472f3526"},
-    {file = "opencv_python-4.10.0.84-cp37-abi3-macosx_11_0_arm64.whl", hash = "sha256:fc182f8f4cda51b45f01c64e4cbedfc2f00aff799debebc305d8d0210c43f251"},
-    {file = "opencv_python-4.10.0.84-cp37-abi3-macosx_12_0_x86_64.whl", hash = "sha256:71e575744f1d23f79741450254660442785f45a0797212852ee5199ef12eed98"},
-    {file = "opencv_python-4.10.0.84-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:09a332b50488e2dda866a6c5573ee192fe3583239fb26ff2f7f9ceb0bc119ea6"},
-    {file = "opencv_python-4.10.0.84-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9ace140fc6d647fbe1c692bcb2abce768973491222c067c131d80957c595b71f"},
-    {file = "opencv_python-4.10.0.84-cp37-abi3-win32.whl", hash = "sha256:2db02bb7e50b703f0a2d50c50ced72e95c574e1e5a0bb35a8a86d0b35c98c236"},
-    {file = "opencv_python-4.10.0.84-cp37-abi3-win_amd64.whl", hash = "sha256:32dbbd94c26f611dc5cc6979e6b7aa1f55a64d6b463cc1dcd3c95505a63e48fe"},
+    {file = "opencv-python-4.9.0.80.tar.gz", hash = "sha256:1a9f0e6267de3a1a1db0c54213d022c7c8b5b9ca4b580e80bdc58516c922c9e1"},
+    {file = "opencv_python-4.9.0.80-cp37-abi3-macosx_10_16_x86_64.whl", hash = "sha256:7e5f7aa4486651a6ebfa8ed4b594b65bd2d2f41beeb4241a3e4b1b85acbbbadb"},
+    {file = "opencv_python-4.9.0.80-cp37-abi3-macosx_11_0_arm64.whl", hash = "sha256:71dfb9555ccccdd77305fc3dcca5897fbf0cf28b297c51ee55e079c065d812a3"},
+    {file = "opencv_python-4.9.0.80-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7b34a52e9da36dda8c151c6394aed602e4b17fa041df0b9f5b93ae10b0fcca2a"},
+    {file = "opencv_python-4.9.0.80-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e4088cab82b66a3b37ffc452976b14a3c599269c247895ae9ceb4066d8188a57"},
+    {file = "opencv_python-4.9.0.80-cp37-abi3-win32.whl", hash = "sha256:dcf000c36dd1651118a2462257e3a9e76db789a78432e1f303c7bac54f63ef6c"},
+    {file = "opencv_python-4.9.0.80-cp37-abi3-win_amd64.whl", hash = "sha256:3f16f08e02b2a2da44259c7cc712e779eff1dd8b55fdb0323e8cab09548086c0"},
 ]
 
 [package.dependencies]
@@ -2779,33 +2779,6 @@ files = [
 ]
 
 [[package]]
-name = "robotpy-xrp"
-version = "2024.3.2.1"
-description = "Binary wrapper for WPILib XRP Vendor library"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "robotpy_xrp-2024.3.2.1-cp310-cp310-macosx_10_16_x86_64.whl", hash = "sha256:72bba853cbe0287e9af7654cbfa6bb3e2e89ee0642c2c2d37f86fc52a1dac017"},
-    {file = "robotpy_xrp-2024.3.2.1-cp310-cp310-manylinux_2_35_x86_64.whl", hash = "sha256:9efddd5d983a6163a6c78f60638893bd060354f8c62b0d1481b6d119d08cac44"},
-    {file = "robotpy_xrp-2024.3.2.1-cp310-cp310-win_amd64.whl", hash = "sha256:ea50f8e1ff6e7bcb1e160b0c4c28e80b7894a223d3a2083d73ea36973ce05068"},
-    {file = "robotpy_xrp-2024.3.2.1-cp311-cp311-macosx_12_0_universal2.whl", hash = "sha256:b520675bcddb27030097f38071576e02d8a569e8f33bf3a9546aefa64cbb0712"},
-    {file = "robotpy_xrp-2024.3.2.1-cp311-cp311-manylinux_2_35_x86_64.whl", hash = "sha256:f71c659e47f210f1908909a1c06dcd706d924e88ff03b99f266357fda913d0ff"},
-    {file = "robotpy_xrp-2024.3.2.1-cp311-cp311-win_amd64.whl", hash = "sha256:f835f586d563c0e3ba9fe3227d0c6b279f0ee9a56a984e58ca5f725c83de653a"},
-    {file = "robotpy_xrp-2024.3.2.1-cp312-cp312-macosx_12_0_universal2.whl", hash = "sha256:c806e122b8cf5cf7cdfd595e6ee7f6edb727386bdfa4ec755e483185df084636"},
-    {file = "robotpy_xrp-2024.3.2.1-cp312-cp312-manylinux_2_35_x86_64.whl", hash = "sha256:b1f33d4ad60db44e0a734b985843553b525bb9c25018b0830a3fdebd702cd121"},
-    {file = "robotpy_xrp-2024.3.2.1-cp312-cp312-win_amd64.whl", hash = "sha256:11cc9d9fa9d5ae3f1193b995da95a20b29c1af4682f9c4c56f60233583cc112c"},
-    {file = "robotpy_xrp-2024.3.2.1-cp38-cp38-macosx_10_16_x86_64.whl", hash = "sha256:9079ee819f8f35d3cbbdbdb433c08bfafeb7734f24b482d6e18f4d19ba4d4762"},
-    {file = "robotpy_xrp-2024.3.2.1-cp38-cp38-manylinux_2_35_x86_64.whl", hash = "sha256:fd9a7c20e1a4bf1a7dfe69e3854d93be356d9fa72cacaa32a3d3e5d39a1cc8e9"},
-    {file = "robotpy_xrp-2024.3.2.1-cp38-cp38-win_amd64.whl", hash = "sha256:e48fe3de68af4b260a8e1032460019766dc7271384c19cb226da6d19d8d572aa"},
-    {file = "robotpy_xrp-2024.3.2.1-cp39-cp39-macosx_10_16_x86_64.whl", hash = "sha256:2720fe7c43288a1865b9eccacd0695fe58afe50a3eaaf49d4b03d159e05a2b2d"},
-    {file = "robotpy_xrp-2024.3.2.1-cp39-cp39-manylinux_2_35_x86_64.whl", hash = "sha256:e61a023109d863c209c20cd924e39a040d9e074ad62e2d99c3ae1536b37243f4"},
-    {file = "robotpy_xrp-2024.3.2.1-cp39-cp39-win_amd64.whl", hash = "sha256:973d99447f0f3239f0b4f4ce0462a178be244805de7df25671c2e7f58c481aac"},
-]
-
-[package.dependencies]
-wpilib = "2024.3.2.1"
-
-[[package]]
 name = "rpds-py"
 version = "0.22.3"
 description = "Python bindings to Rust's persistent data structures (rpds)"
@@ -3320,4 +3293,4 @@ robotpy-wpiutil = "2024.3.2.1"
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.12"
-content-hash = "3284a6126bac176d5971a3944946b0c68131b13c1e66c416e951f2ad40972147"
+content-hash = "7bce98c215999053bb595d71b23d2ab0146f094de3f9ca24f80bdd886c4e7e29"

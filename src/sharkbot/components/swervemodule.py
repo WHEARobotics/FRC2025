@@ -1,9 +1,10 @@
+from wpilib import PWMMotorController
 from wpimath.geometry import Rotation2d
 from wpimath.kinematics import SwerveModuleState
 
 
 class SwerveModule:
-    def __init__(self, drive_motor_id: int, turn_motor_id: int) -> None:
+    def __init__(self, driveMotorId: int, turnMotorId: int) -> None:
         """
         Initialize the swerve module.
 
@@ -11,9 +12,9 @@ class SwerveModule:
         - drive_motor_id: int - Motor controller ID for driving.
         - turn_motor_id: int - Motor controller ID for turning.
         """
-        self.drive_motor = KrakenMotorController(drive_motor_id)
-        self.turn_motor = KrakenMotorController(turn_motor_id)
-        self.current_state = SwerveModuleState()
+        self.driveMotor = PWMMotorController("driveMotor", driveMotorId)
+        self.turnMotor = PWMMotorController("turnMotor", turnMotorId)
+        self.currentState = SwerveModuleState()
 
     def setDesiredState(self, state: SwerveModuleState) -> None:
         """
@@ -26,11 +27,11 @@ class SwerveModule:
         optimized_state = SwerveModuleState.optimize(state, self.getCurrentAngle())
 
         # Set motor speeds
-        self.drive_motor.set(optimized_state.speed)
-        self.turn_motor.setAngle(optimized_state.angle)
+        self.driveMotor.set(optimized_state.speed)
+        self.turnMotor.setAngle(optimized_state.angle)
 
         # Update current state
-        self.current_state = optimized_state
+        self.currentState = optimized_state
 
     def getState(self) -> SwerveModuleState:
         """
@@ -39,7 +40,7 @@ class SwerveModule:
         Returns:
         - SwerveModuleState: Current speed and angle of the module.
         """
-        return self.current_state
+        return self.currentState
 
     def getCurrentAngle(self) -> Rotation2d:
         """
@@ -48,11 +49,11 @@ class SwerveModule:
         Returns:
         - Rotation2d: The module's current angle in degrees.
         """
-        return self.turn_motor.getAngle()
+        return self.turnMotor.getAngle()
 
     def stop(self) -> None:
         """
         Stop the swerve module.
         """
-        self.drive_motor.stop()
-        self.turn_motor.stop()
+        self.driveMotor.stop()
+        self.turnMotor.stop()

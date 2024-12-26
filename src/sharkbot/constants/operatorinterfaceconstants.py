@@ -7,3 +7,6 @@ class OperatorInterfaceConstants:
     BUTTON_B: int = XboxController.Button.kB
     BUTTON_X: int = XboxController.Button.kX
     BUTTON_Y: int = XboxController.Button.kY
+
+    DRIVER_CONTROLLER_PORT: int = 0
+    GUNNER_CONTROLLER_PORT: int = 1

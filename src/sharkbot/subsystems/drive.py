@@ -1,23 +1,23 @@
-from wpilib import Gyro
+from commands2 import SubsystemBase
+
+from wpilib import ADXRS450_Gyro
 from wpimath.geometry import Rotation2d
-from wpimath.kinematics import SwerveDriveKinematics, SwerveDriveOdometry, ChassisSpeeds, SwerveModuleState
+from wpimath.kinematics import SwerveDrive4Kinematics, SwerveDrive4Odometry, ChassisSpeeds, SwerveModuleState, \
+    SwerveModulePosition
 from sharkbot.components.swervemodule import SwerveModule
 from sharkbot.constants.driveconstants import DriveConstants
 
 from sharkbot.util.ntloggerutility import NTLoggerUtility
 
 
-class DriveSubsystem:
-    def __init__(self, gyro: Gyro) -> None:
+class DriveSubsystem(SubsystemBase):
+    def __init__(self) -> None:
         """
         Initialize the swerve drive subsystem.
 
-        Parameters:
-        - gyro: Gyro - A gyro object to provide the robot's heading.
         """
         # Gyro for field-relative control
-        self.gyro = gyro
-        self.gyro.reset()
+        self.gyro = ADXRS450_Gyro()
 
         # Swerve modules
         self.front_left = SwerveModule(DriveConstants.FRONT_LEFT_DRIVE_ID, DriveConstants.FRONT_LEFT_TURN_ID)
@@ -25,8 +25,15 @@ class DriveSubsystem:
         self.back_left = SwerveModule(DriveConstants.BACK_LEFT_DRIVE_ID, DriveConstants.BACK_LEFT_TURN_ID)
         self.back_right = SwerveModule(DriveConstants.BACK_RIGHT_DRIVE_ID, DriveConstants.BACK_RIGHT_TURN_ID)
 
+        module_positions = (
+            SwerveModulePosition(distance=0.0, angle=Rotation2d(0.0)),
+            SwerveModulePosition(distance=0.0, angle=Rotation2d(0.0)),
+            SwerveModulePosition(distance=0.0, angle=Rotation2d(0.0)),
+            SwerveModulePosition(distance=0.0, angle=Rotation2d(0.0))
+        )
+
         # Swerve kinematics (robot-relative positions of the modules)
-        self.kinematics = SwerveDriveKinematics(
+        self.kinematics = SwerveDrive4Kinematics(
             DriveConstants.FRONT_LEFT_LOCATION,
             DriveConstants.FRONT_RIGHT_LOCATION,
             DriveConstants.BACK_LEFT_LOCATION,
@@ -34,7 +41,7 @@ class DriveSubsystem:
         )
 
         # Odometry for tracking robot position on the field
-        self.odometry = SwerveDriveOdometry(self.kinematics, self.getHeading())
+        self.odometry = SwerveDrive4Odometry(self.kinematics, self.getHeading(), module_positions)
 
         self.logger = NTLoggerUtility("DriveSubsystemLogs")
 
@@ -60,7 +67,7 @@ class DriveSubsystem:
         states = self.kinematics.toSwerveModuleStates(chassis_speeds)
 
         # Normalize speeds to ensure they do not exceed maximum speed
-        SwerveDriveKinematics.desaturateWheelSpeeds(states, DriveConstants.MAX_SPEED)
+        SwerveDrive4Kinematics.desaturateWheelSpeeds(states, DriveConstants.MAX_SPEED)
 
         # Apply states to each module
         self.front_left.setDesiredState(states[0])

@@ -8,7 +8,7 @@ from sharkbot.util.ntloggerutility import NTLoggerUtility
 class HoldClimber(commands2.CommandBase):
     def __init__(self, climber: Climber):
         self.climber = climber
-        self.addRequirements([self.climber])
+        self.addRequirements(self.climber)
 
         self.logger = NTLoggerUtility("ClimberLogs")
 

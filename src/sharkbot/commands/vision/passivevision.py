@@ -1,3 +1,6 @@
+from commands2 import CommandBase
+from sharkbot.subsystems.vision import Vision
+
 class PassiveVision(CommandBase):
     def __init__(self, vision: Vision):
         super().__init__()

@@ -3,6 +3,7 @@
 from commands2.button import JoystickButton
 from wpilib import XboxController
 
+from commands.shooter.stopshooter import StopShooter
 from sharkbot.commands.autonomous_command import AutonomousCommand
 from sharkbot.commands.climber.holdclimberposition import HoldClimber
 from sharkbot.commands.drive.drivewithjoysticks import DriveWithJoysticks
@@ -52,12 +53,9 @@ class RobotSystems:
         Map controller buttons to specific commands.
         """
         # Driver Controller Bindings
-        JoystickButton(self.driver_controller, OperatorInterfaceConstants.BUTTON_A).whenPressed(self.shooter.shootHighGoalCommand())
-        JoystickButton(self.driver_controller, OperatorInterfaceConstants.BUTTON_B).whenPressed(self.drive.alignToTargetCommand())
 
         # Gunner Controller Bindings
-        JoystickButton(self.gunner_controller, OperatorInterfaceConstants.BUTTON_X).whenPressed(self.climber.extendCommand())
-        JoystickButton(self.gunner_controller, OperatorInterfaceConstants.BUTTON_Y).whenPressed(self.climber.retractCommand())
+        JoystickButton(self.gunner_controller, OperatorInterfaceConstants.BUTTON_A).onTrue(StopShooter(self.shooter))
 
     def getAutonomousCommand(self):
         """
