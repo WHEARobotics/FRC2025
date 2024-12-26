@@ -36,6 +36,7 @@ case, not SnakeCase.
 3. In the file, create a new class called `StopShooterCommand` that inherits from `CommandBase`. Import any modules that
 you need. (For example, `datetime` for logging the current time.)
 
+For the following steps, you can refer to the [command template](../src/sharkbot/commands/command_template.txt) for a template.
 4. In the class, implement the `__init__` method. In this method, you should call the `requires` method and pass in the
    `Shooter` subsystem. You should also create a logger object using the `NTLoggerUtility` class.
 ```python
@@ -103,83 +104,25 @@ a `stop` method to the `Shooter` class.
     def getGateStatus(self):
         return self.gate.getStatus()
 ```
-7. Implement tests for the new command in the `tests` directory (See the `NewTestRecipe.md`). For example, this is 
-complex, but you might want:
+
+8. Implement the test for the binding of the command to the control system. Open 
+**tests/testcontrollerbindings.py** file and add a new test using this template:
+
+
+![Command Binding Test Template](media/key_binding_template.png)
 
 ```python
-import unittest
-from unittest.mock import MagicMock
-import re
-from commands.shooter.stopshooter import StopShooter
-
-
-class TestStopShooterCommand(unittest.TestCase):
-    def setUp(self):
-        # Mock the shooter subsystem
-        self.shooter = MagicMock()
-        self.shooter.getFlywheelRpm.return_value = 1234  # Example RPM value
-        self.shooter.getGateStatus.return_value = "open"  # Example gate status
-
-        # Mock logger
-        self.logger = MagicMock()
-
-        # Create StopShooter instance
-        self.command = StopShooter(self.shooter)
-        self.command.logger = self.logger  # Replace with mocked logger
-
-    def assert_log_message(self, actual_message, expected_pattern):
-        """
-        Assert that a log message matches the expected regex pattern.
-
-        Parameters:
-        - actual_message: The actual log message.
-        - expected_pattern: A regex pattern to match the log message.
-        """
-        match = re.match(expected_pattern, actual_message)
-        self.assertIsNotNone(
-            match,
-            msg=f"Log message '{actual_message}' does not match pattern '{expected_pattern}'",
-        )
-
-    def test_initialize(self):
-        # Call the initialize method
-        self.command.initialize()
-
-        # Verify the shooter stop method is called
-        self.shooter.stop.assert_called_once()
-
-        # Verify the logger logs the correct message
-        expected_pattern = r"\[%\d{2}:\d{2}:\d{2}\] StopShooterCommand: Stopping shooter"
-        actual_message = self.logger.info.call_args[0][1]  # Extract logged message
-        self.assert_log_message(actual_message, expected_pattern)
-
-    def test_execute(self):
-        # Call the execute method
-        self.command.execute()
-
-        # Verify the logger logs the correct message
-        expected_pattern = (
-            r"\[%\d{2}:\d{2}:\d{2}\] Shooter flywheel RPM: 1234\s+"
-            r"Gate status: open"
-        )
-        actual_message = self.logger.debug.call_args[0][1]  # Extract logged message
-        self.assert_log_message(actual_message, expected_pattern)
-
-    def test_end(self):
-        # Call the end method
-        self.command.end()
-
-        # Verify the logger logs the correct message
-        expected_pattern = r"\[%\d{2}:\d{2}:\d{2}\] StopShooterCommand: Shooter stopped"
-        actual_message = self.logger.info.call_args[0][1]  # Extract logged message
-        self.assert_log_message(actual_message, expected_pattern)
+@patch("commands.shooter.stopshooter.StopShooter")
+ def test_gunner_controller_button_a_binding(self, mock_stop_shooter):
+     """
+     Test that BUTTON_A on the gunner_controller schedules StopShooter.
+     """
+     self.simulate_button_press(
+         controller=self.robot_systems.gunner_controller,
+         button=OperatorInterfaceConstants.BUTTON_A,
+         command_mock=mock_stop_shooter
+     )
 ```
-
-8. Implement the test for the binding of the command to the control system. For example:
-
-```python
-import unittest
-
-from sharkbot.commands.shooter.stopshooter import StopShooter
-from robot import RobotSystems
+7. ADVANCED!!!: Implement tests for the new command in the `tests` directory (See [Test Recipe](NewTestRecipe.md#Command)). 
+For example, see **tests/test_stopshootercommand**. 
 
