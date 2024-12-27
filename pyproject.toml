@@ -2,7 +2,7 @@
 name = "frc2025"
 version = "0.1.0"
 description = "First Robotics Competition code for Team 3881 WHEA Sharkbots"
-authors = ["Your Name <you@example.com>"]
+authors = ["WHEA Robotics"]
 license = "MIT"
 readme = "README.md"
 package-mode = false
@@ -11,7 +11,7 @@ package-mode = false
 python = "~3.12"
 numpy = "^1.25.2"
 opencv-python = "<4.10"
-robotpy = {extras = ["commands2"], version = "^2024.3.2.2"}
+robotpy = {extras = ["commands2", "apriltag", "sim"], version = "^2024.3.2.2"}
 wpilib = "^2024.3.2.1"
 pynput = "^1.7.7"
 rubicon-objc = "0.4.0"
@@ -20,13 +20,7 @@ pynetworktables = "^2021.0.0"
 [tool.poetry.group.dev.dependencies]
 mkdocs = "^1.6.1"
 mkdocs-material = "^9.5.42"
-jupyterlab = "^4.2.5"
 graphviz = "^0.20.3"
-
-[[tool.poetry.source]]
-name = "robotpy"
-url = "https://www.robotpy.org/wheels/stable"
-default = false
 
 [tool.robotpy]
 
@@ -48,7 +42,7 @@ robotpy_extras = [
     # "playingwithfusion",
     # "rev",
     # "romi",
-    # "sim",
+    "sim",
     # "xrp",
 ]
 
