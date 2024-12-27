@@ -31,7 +31,7 @@ class RobotSystems:
 
         # Initialize Controllers (These aren't subsystems because they're single pieces of hardware)
         self.driver_controller = XboxController(OperatorInterfaceConstants.DRIVER_CONTROLLER_PORT)
-        self.gunner_controller = XboxController(OperatorInterfaceConstants.GUNNER_CONTROLLER_PORT)
+        self.operator_controller = XboxController(OperatorInterfaceConstants.OPERATOR_CONTROLLER_PORT)
 
         # Set Default Commands
         self.setDefaultCommands()
@@ -54,8 +54,8 @@ class RobotSystems:
         """
         # Driver Controller Bindings
 
-        # Gunner Controller Bindings
-        JoystickButton(self.gunner_controller, OperatorInterfaceConstants.BUTTON_A).onTrue(StopShooter(self.shooter))
+        # operator Controller Bindings
+        JoystickButton(self.operator_controller, OperatorInterfaceConstants.BUTTON_A).onTrue(StopShooter(self.shooter))
 
     def getAutonomousCommand(self):
         """

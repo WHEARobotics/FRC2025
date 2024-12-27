@@ -14,14 +14,14 @@ class TestRobotSystems(unittest.TestCase):
 
         # Mock the controllers
         self.mock_driver_controller = self.MockXboxController.return_value
-        self.mock_gunner_controller = self.MockXboxController.return_value
+        self.mock_operator_controller = self.MockXboxController.return_value
 
         # Initialize the RobotSystems class
         self.robot_systems = RobotSystems()
 
         # Replace controllers with mocks
         self.robot_systems.driver_controller = self.mock_driver_controller
-        self.robot_systems.gunner_controller = self.mock_gunner_controller
+        self.robot_systems.operator_controller = self.mock_operator_controller
 
         # Initialize the CommandScheduler
         self.scheduler = CommandScheduler.getInstance()
@@ -57,12 +57,12 @@ class TestRobotSystems(unittest.TestCase):
         print(f"Scheduled commands after button press: {self.scheduler._scheduledCommands}")
 
     @patch("commands.shooter.stopshooter.StopShooter")
-    def test_gunner_controller_button_a_binding(self, mock_stop_shooter):
+    def test_operator_controller_button_a_binding(self, mock_stop_shooter):
         """
-        Test that BUTTON_A on the gunner_controller schedules StopShooter.
+        Test that BUTTON_A on the operator_controller schedules StopShooter.
         """
         self.simulate_button_press(
-            controller=self.robot_systems.gunner_controller,
+            controller=self.robot_systems.operator_controller,
             button=OperatorInterfaceConstants.BUTTON_A,
             command_mock=mock_stop_shooter
         )

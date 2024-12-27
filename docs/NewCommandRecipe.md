@@ -113,12 +113,12 @@ a `stop` method to the `Shooter` class.
 
 ```python
 @patch("commands.shooter.stopshooter.StopShooter")
- def test_gunner_controller_button_a_binding(self, mock_stop_shooter):
+ def test_operator_controller_button_a_binding(self, mock_stop_shooter):
      """
-     Test that BUTTON_A on the gunner_controller schedules StopShooter.
+     Test that BUTTON_A on the operator_controller schedules StopShooter.
      """
      self.simulate_button_press(
-         controller=self.robot_systems.gunner_controller,
+         controller=self.robot_systems.operator_controller,
          button=OperatorInterfaceConstants.BUTTON_A,
          command_mock=mock_stop_shooter
      )

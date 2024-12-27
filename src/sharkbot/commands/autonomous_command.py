@@ -1,56 +1,132 @@
 import commands2
+from sharkbot.util.ntloggerutility import NTLoggerUtility
+import datetime
 import wpilib
 
 from subsystems.drive import DriveSubsystem
 
+class RunAutonomous(commands2.CommandBase):
+    """
+    Drives the robot clockwise forward for 2 seconds, then backwards for 2 seconds.
+    """
 
-# See `MyContainer.getAutonomousCommand`
-def AutonomousCommand(drive: DriveSubsystem):
-    return (CircleCWForward(drive)
-            .andThen(CircleCWBack(drive)))
+    def __init__(self, drive : DriveSubsystem):
+        """
+        Create member variables for the command.
+
+        Args:
+            drive: A variable holding a reference to the robot's DriveSubsystem.
+        """
+        super().__init__()
+        self.drive = drive
+        self.logger = NTLoggerUtility("DriveLogs")
+        self.addRequirements(drive)
+
+    def getTimestamp(self):
+        return datetime.now().strftime("%H:%M:%S")
+
+    def initialize(self) -> None:
+        """
+        Called once when the Command is scheduled.
+
+        Write's a timestamped message to the "Command" log in the `DriveLogs` table that the command has been created.
+
+        Use command composition to run the `CircleCWForward` command, then the `CircleCWBack` command.
+        """
+        timestamp = self.getTimestamp()
+        msg = f"[%{timestamp}] RunAutonomousCommand: CircleCWForward -> CircleCWBack"
+        self.logger.info("Command", msg)
+
+        cmd = (CircleCWForward(self.drive)
+            .andThen(CircleCWBack(self.drive)))
 
 # Behavior in commands. Simple states.
 class CircleCWForward(commands2.CommandBase):
+    """
+    Drives the robot forward in a clockwise circle for 2 seconds
+    """
     def __init__(self, drive: DriveSubsystem):
-        self.drive_system = drive
+        super().__init__()
+        self.drive = drive
+        self.logger = NTLoggerUtility("DriveLogs")
         self.addRequirements(drive)
 
-        # Maybe you don't need this: can't you schedule a command to run for n seconds?
         self.timer = wpilib.Timer()
 
-    def initialize(self):
+        timestamp = self.getTimestamp()
+        msg = f"[%{timestamp}] CircleCWForward: initialized"
+        self.logger.info("Command", msg)
+
+    def getTimestamp(self) -> str:
+        return datetime.now().strftime("%H:%M:%S")
+
+    def initialize(self) -> None:
         self.timer.start()
-        self.drive_system.io.setLed(True)
 
-    def execute(self):
-        self.drive_system.drive(1.0, -0.5)
+    def execute(self) -> None:
+        """
+        Called continuously while the command is scheduled. (This is such simple behavior it could be in `initialize`.)
 
-    def isFinished(self):
+        """
+        self.drive.drive(1.0, -0.5)
+
+    def isFinished(self) -> bool:
+        """
+        :return `True` when the command should end. In this case, after 2 seconds.
+
+        """
         return self.timer.get() > 2.0
 
-    def end(self, interrupted: bool):
-        self.drive_system.io.setLed(False)
-        self.drive_system.drive(0, 0)
+    def end(self, interrupted: bool) -> None:
+        """
+        Stops the robot.
+        :param interrupted:
+        """
+        msg = f"[%{timestamp}] CircleCWForward: ended"
+        self.logger.info("Command", msg)
+        self.drive.drive(0, 0)
 
 
 class CircleCWBack(commands2.CommandBase):
+    """
+     Drives the robot backwart in a clockwise circle for 2 seconds
+     """
+
     def __init__(self, drive: DriveSubsystem):
-        self.drive_system = drive
+        super().__init__()
+        self.drive = drive
+        self.logger = NTLoggerUtility("DriveLogs")
         self.addRequirements(drive)
 
-        # Maybe you don't need this: can't you schedule a command to run for n seconds?
         self.timer = wpilib.Timer()
 
-    def initialize(self):
+        timestamp = self.getTimestamp()
+        msg = f"[%{timestamp}] CircleCWBackwardCommand: initialized"
+        self.logger.info("Command", msg)
+
+    def getTimestamp(self) -> str:
+        return datetime.now().strftime("%H:%M:%S")
+
+    def initialize(self) -> None:
         self.timer.start()
-        self.drive_system.io.setLed(True)
 
-    def execute(self):
-        self.drive_system.drive(-1.0, -0.5)
+    def execute(self) -> None:
+        """
+        Called continuously while the command is scheduled. (This is such simple behavior it could be in `initialize`.)
 
-    def isFinished(self):
+        """
+        self.drive.drive(1.0, -0.5)
+
+    def isFinished(self) -> bool:
+        """
+        :return `True` when the command should end. In this case, after 2 seconds.
+
+        """
         return self.timer.get() > 2.0
 
-    def end(self, interrupted: bool):
-        self.drive_system.io.setLed(False)
-        self.drive_system.drive(0, 0)
+    def end(self, interrupted: bool) -> None:
+        """
+        Stops the robot.
+        :param interrupted:
+        """
+        self.drive.drive(0, 0)
