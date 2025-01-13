@@ -9,15 +9,16 @@ from commands.drive.drivewithjoysticks import DriveWithJoysticks
 from constants.operatorinterfaceconstants import OperatorInterfaceConstants
 
 from subsystems.drive import DriveSubsystem
+from subsystems.vision import VisionSubsystem
 
-import ntcore
 
 # This class is a container for all the robot's subsystems. This class will change as new subsystems are added or removed.
 class RobotSystems:
     def __init__(self):
         self.drive = DriveSubsystem()
+        self.vision = VisionSubsystem()
 
-        self.subsystems = [self.drive]
+        self.subsystems = [self.drive, self.vision]
 
         # Initialize Controllers (These aren't subsystems because they're single pieces of hardware)
         self.driver_controller = XboxController(OperatorInterfaceConstants.DRIVER_CONTROLLER_PORT)

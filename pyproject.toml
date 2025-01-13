@@ -17,6 +17,7 @@ wpilib = "^2025.0.1"
 pynput = "^1.7.7"
 rubicon-objc = "0.4.0"
 pynetworktables = "^2021.0.0"
+limelightlib-python = "^0.9.6"
 
 [tool.poetry.group.dev.dependencies]
 mkdocs = "^1.6.1"
