@@ -24,6 +24,8 @@ class VisionSubsystem(commands2.Subsystem):
         if len(discovered_limelights) == 0:
             self.logger.log("ERROR", "Status", "No Limelights found!")
             self.limelight = None
+            self.limelight_result = None
+            self.result_timestamp = None
         else:
             self.logger.log("INFO", "Status", "Found Limelight!")
             limelight_address = limelight.Limelight(discovered_limelights[0])
@@ -44,9 +46,15 @@ class VisionSubsystem(commands2.Subsystem):
         else:
             return None
 
+    def diagnose(self) -> str:
+        found_limelight = "Limelight found!" if self.limelight is not None else "No Limelight found!"
+        getting_status = "Getting results..." if self.limelight is not None and self.limelight_result is not None else "No results available."
+        time_status = f"Last result at {self.result_timestamp}" if self.result_timestamp is not None else ""
+        return f"{found_limelight} {getting_status} {time_status}"
+
     def logPeriodic(self):
         self.logger.log("DEBUG", "BotPose", str(self.getBotPose()))
-        self.logged.log("DEBUG", "Result_timestamp", self.result_timestamp)
+        self.logger.log("DEBUG", "Result_timestamp", self.result_timestamp)
 
     def _limelightPeriodic(self) -> Optional[limelightresults.GeneralResult]:
         if self.limelight is None:

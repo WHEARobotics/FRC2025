@@ -38,7 +38,7 @@ be a noun that describes the subsystem's purpose. For example, the `Drive` subsy
 lowercase with `.py` appended to the end. For example, `subsystems/drive.py`.
 
 1. Create a new Python class named after the subsystem in CamelCase. For example, `Drive`. This class should inherit 
-from the `commands2.SubsystemBase` class.
+from the `commands2.Subsystem` class.
 
 1. In the class, implement the `__init__` method. In this method, you should create instance variables for the motors, 
 sensors, and other components that the subsystem uses. You should also call the `super().__init__()` method. Create a
