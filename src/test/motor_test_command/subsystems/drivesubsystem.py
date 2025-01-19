@@ -62,9 +62,34 @@ class DriveSubsystem(commands2.SubsystemBase):
         if not status.is_ok():
             print(f'Could not apply configs, error code: {status.name}')
 
+        # Because original code output every *200*ms and loop runs every *20*ms...
+        self.output_every_n_seconds = 0.2
+        # ... we keep this counter that runs from 1 to 10 (see periodic_output() below)
+        self.periodic_has_run_n_times = 0
+
+
         # Not sure if this needs to be sent again and again
         self.setDefaultCommand(NeutralRequest(self))
+
+    def periodic(self):
+        self.output_periodic()
+        # Add more periodic functions here
+
+    def output_periodic(self):
+        # This fn is called every 20ms in all modes, but outputs every 200ms
+        times_to_run = self.output_every_n_seconds // 0.02 #(20ms)
+
+        # Have we looped enough times to update the dashboard?
+        if self.periodic_has_run_n_times % times_to_run == 0:
+            self.output_rotations_and_position()
+            # Reset the counter
+            self.periodic_has_run_n_times = 0
+        else:
+            self.periodic_has_run_n_times += 1
         
+    def output_rotations_and_position(self):
+        wpilib.SmartDashboard.putString('DB/String 0', 'rotations: {:5.1f}'.format(self.kraken.get_position().value))
+
     # Not sure!
     def set_to_neutral(self):
         request = phoenix6.controls.NeutralOut()
@@ -79,7 +104,3 @@ class DriveSubsystem(commands2.SubsystemBase):
     def set_motion_magic_position(self, position):
         request = phoenix6.controls.MotionMagicPosition(position).with_slot(1)
         self.kraken.set_control(request)
-
-    def output_rotations_and_position(self):
-        wpilib.SmartDashboard.putString('DB/String 0', 'rotations: {:5.1f}'.format(self.kraken.get_position().value))
-
