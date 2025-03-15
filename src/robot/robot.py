@@ -34,16 +34,18 @@ class Robot(commands2.TimedCommandRobot):
 
     # Robot overall lifecycle methods
     def robotInit(self):
-        pass
+        CommandScheduler.getInstance().onCommandExecute(lambda command: print(f"Executing: {command.getName()}"))
 
     def robotPeriodic(self):
         CommandScheduler.getInstance().run()
+        self.container.periodic()
 
     def robotEnd(self):
         pass
 
     # Autonomous lifecycle methods
     def autonomousInit(self):
+        print("Robot.autonomousInit()")
         self.autonomous_command = self.container.get_auto_command()
         if self.autonomous_command is not None:
             self.autonomous_command.schedule()  # Note that this is a single command for all of autonomous
@@ -52,7 +54,7 @@ class Robot(commands2.TimedCommandRobot):
         pass
 
     def autonomousEnd(self):
-        pass
+        print("Robot.autonomousEnd()")
 
     def disabledPeriodic(self):
         # Calling this here so when testing or changing the auto plan last minute would be updated
