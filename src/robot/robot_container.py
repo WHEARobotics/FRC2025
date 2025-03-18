@@ -113,10 +113,6 @@ class RobotContainer:
             return Autos.forward_and_takeout_algae(self.drive_subsystem)
             
 
-    # def get_teleop_command(self):
-    #     return DriveWithJoystickCommand(
-    #         drive=self.drive_subsystem, drive_percent_fn=self.get_drive_value_from_joystick
-    #     )
 
     def get_drive_value_from_joystick(self) -> tuple[float, float, float]:
         """
